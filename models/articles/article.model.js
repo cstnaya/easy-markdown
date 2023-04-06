@@ -3,6 +3,7 @@ const { nanoid } = require("nanoid");
 
 // insert new post
 async function saveArticle(newArticle) {
+  // TODO: id is existed but title is untitled.
   const article = { ...newArticle, id: nanoid(), updatedAt: new Date() };
   await Article.create(article);
 

@@ -21,9 +21,11 @@ app.use(cookieParser());
 app.use("/auth", authRouter);
 app.use("/articles", authedMiddleware, articleRouter);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
+
+app.get("/*", express.static(path.join(__dirname, "client", "dist")));
 
 db_trace_connect();
 

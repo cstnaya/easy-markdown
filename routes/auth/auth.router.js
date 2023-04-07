@@ -5,6 +5,8 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const authController = require("./auth.controller");
 const config = require("../../configs/config");
 
+const { authedMiddleware } = require("../../middlewares/authed.middle");
+
 const AUTH_OPTIONS = {
   callbackURL: config.CALLBACK_URL,
   clientID: config.CLIENT_ID,
@@ -32,5 +34,7 @@ authRouter.get(
 );
 
 authRouter.post("/logout", authController.logout);
+
+authRouter.get("/verify", authedMiddleware, authController.verifyAuthed);
 
 module.exports = authRouter;

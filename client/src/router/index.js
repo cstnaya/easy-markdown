@@ -15,7 +15,7 @@ const router = createRouter({
       component: () => import('../views/NewView.vue')
     },
     {
-      path: '/:postId',
+      path: '/post/:postId',
       beforeEnter: authorized,
       component: () => import('../views/HackView.vue')
     },

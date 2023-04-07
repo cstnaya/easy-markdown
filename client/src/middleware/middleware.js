@@ -11,7 +11,7 @@ async function createdPost() {
   const newPostId = nanoid()
   await httpCreateNewPost(newPostId)
 
-  return `/${newPostId}`
+  return `/post/${newPostId}`
 }
 
 export { authorized, createdPost }

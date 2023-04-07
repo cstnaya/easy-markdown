@@ -1,3 +1,15 @@
+<script setup>
+import EditView from '../components/EditView.vue'
+import MarkView from '../components/MarkView.vue'
+
+import { useEditor } from '../logic/useEditor.vue'
+
+const { text, markedText, modifyText } = useEditor()
+</script>
+
 <template>
-    <h1>// TODO: hack view here... {{ $route.params.postId }}</h1>
+  <div>
+    <EditView :text="text" @modifyText="modifyText" />
+    <MarkView :markedText="markedText" />
+  </div>
 </template>

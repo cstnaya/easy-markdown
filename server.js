@@ -4,11 +4,10 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 
 const { db_connect, db_trace_connect } = require("./utils/db");
+const { authedMiddleware } = require("./middlewares/authed.middle");
 
 const authRouter = require("./routes/auth/auth.router");
 const articleRouter = require("./routes/articles/article.router");
-
-const { authedMiddleware } = require("./middlewares/authed.middle");
 
 const PORT = 8000;
 

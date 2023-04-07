@@ -16,7 +16,7 @@ async function verifiedCallback(accessToken, refreshToken, profile, callback) {
     // pass whole user profile into callback endpoint
     return callback(null, profile);
   } catch (e) {
-    throw new Error("login process error.")
+    throw new Error("login process error.");
   }
 }
 
@@ -30,13 +30,26 @@ function authCallbackHandler(req, res) {
   });
 
   // set JWT in cookie
-  res.cookie("token", token, { httpOnly: true, maxAge: COOKIE_EXPIRED });
+  res.cookie("token", token, {
+    httpOnly: true,
+    maxAge: COOKIE_EXPIRED,
+    sameSite: "Lax",
+    secure: true,
+  });
 
   // TODO: successful auth, maybe can send email here
-
   res.redirect("/");
+}
+
+function verifyAuthed(req, res) {
+  res.json({ userId: req.user });
 }
 
 function logout(req, res) {}
 
-module.exports = { verifiedCallback, authCallbackHandler, logout };
+module.exports = {
+  verifiedCallback,
+  authCallbackHandler,
+  logout,
+  verifyAuthed,
+};

@@ -1,10 +1,8 @@
 const Article = require("./article.mongo");
-const { nanoid } = require("nanoid");
 
 // insert new post
 async function saveArticle(newArticle) {
-  // TODO: id is existed but title is untitled.
-  const article = { ...newArticle, id: nanoid(), updatedAt: new Date() };
+  const article = { ...newArticle, updatedAt: new Date() };
   await Article.create(article);
 
   return article;
@@ -27,10 +25,13 @@ async function showAllArticles(authorId) {
 }
 
 async function updateArticle(id, updatedArticle) {
-  await Article.updateOne(
+  const article = await Article.findOneAndUpdate(
     { id: id },
-    { ...updatedArticle, updatedAt: new Date() }
+    { ...updatedArticle, updatedAt: new Date() },
+    { returnDocument: 'after' }
   );
+
+  return article;
 }
 
 async function deleteArticle(id) {

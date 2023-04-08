@@ -1,19 +1,27 @@
 import axios from 'axios'
 
-async function httpIsAuthorized() {
-  try {
-    // const res = await axios(`/auth/verify`)
-    // const { userId } = await res.json()
-    // console.log(userId)
-  } catch (e) {
-    console.error(e)
-  }
+const API_URL = import.meta.env.VITE_API_URL
 
-  return true // TODO:
+const api = axios.create({
+  baseURL: API_URL,
+  withCredentials: true
+})
+
+async function httpIsAuthorized() {
+  const res = await api.get(`/auth/verify`)
+  return res.data.user
 }
 
 async function httpCreateNewPost(newPostId) {
-  return newPostId // TODO:
+  const res = await api.post(`/api/articles`, {
+    id: newPostId
+  })
+  return res.data
 }
 
-export { httpCreateNewPost, httpIsAuthorized }
+async function httpUpdatePost(postId, newTitle, newContent) {
+  const res = await api.patch(`/api/articles/${postId}`, { content: newContent, title: newTitle })
+  return res.data.article
+}
+
+export { httpCreateNewPost, httpIsAuthorized, httpUpdatePost }

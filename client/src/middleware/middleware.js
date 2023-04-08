@@ -1,15 +1,19 @@
 import { nanoid } from 'nanoid'
-import { httpCreateNewPost, httpIsAuthorized } from '../api/api'
+import { useAuthed } from '@/stores/useAuthed'
 
 async function authorized() {
-  if (!(await httpIsAuthorized())) {
+  const { getUserInfo } = useAuthed()
+
+  if (!(await getUserInfo())) {
     return '/'
   }
 }
 
 async function createdPost() {
+  const { getUserNewPost } = useAuthed()
+
   const newPostId = nanoid()
-  await httpCreateNewPost(newPostId)
+  await getUserNewPost(newPostId)
 
   return `/post/${newPostId}`
 }

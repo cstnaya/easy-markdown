@@ -4,12 +4,8 @@ import { ref, computed } from 'vue'
 export const useEditor = () => {
   const text = ref('')
 
-  const markedText = computed(() => text.value)
+  const title = computed(() => text.value.split('\n')?.[0])
 
-  const modifyText = (newText) => {
-    text.value = newText
-  }
-
-  return { text, markedText, modifyText }
+  return { text, title }
 }
 </script>

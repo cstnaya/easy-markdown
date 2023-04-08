@@ -11,8 +11,8 @@ async function httpCreateArticle(req, res) {
   const userId = req.user;
   const newArticle = {
     authorId: userId,
-    title: decoded.title,
-    content: decoded.content,
+    id: decoded.id,
+    title: "untitled",
   };
 
   try {
@@ -45,9 +45,9 @@ async function httpUpdateArticle(req, res) {
     title: req.body.title,
   };
 
-  await updateArticle(articleId, updatedArticle);
+ const article = await updateArticle(articleId, updatedArticle);
 
-  res.json({ success: true });
+  res.json({ article });
 }
 
 async function httpDestroyArticle(req, res) {

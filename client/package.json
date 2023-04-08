@@ -10,16 +10,23 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vueuse/core": "^9.13.0",
     "axios": "^1.3.5",
     "nanoid": "^4.0.2",
-    "pinia": "^2.0.32",
+    "pinia": "^2.0.34",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6"
+    "vue-markdown": "^2.2.4",
+    "vue-router": "^4.1.6",
+    "vue3-markdown": "^1.1.7"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.1.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^9.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-runtime": "^6.26.0",
     "eslint": "^8.34.0",
     "eslint-plugin-vue": "^9.9.0",
     "prettier": "^2.8.4",

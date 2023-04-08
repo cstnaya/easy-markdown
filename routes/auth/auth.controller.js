@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { saveUserData } = require("../../models/users/user.model");
+const { saveUserData, getUserDetail } = require("../../models/users/user.model");
 const config = require("../../configs/config");
 
 const COOKIE_EXPIRED = 1000 * 60 * 60 * 24 * 14;
@@ -41,8 +41,9 @@ function authCallbackHandler(req, res) {
   res.redirect("/");
 }
 
-function verifyAuthed(req, res) {
-  res.json({ userId: req.user });
+async function verifyAuthed(req, res) {
+  const userInfo = await getUserDetail(req.user)
+  res.json({ user: userInfo });
 }
 
 function logout(req, res) {}

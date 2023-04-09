@@ -1,5 +1,5 @@
 <script setup>
-import { watch, ref, computed } from 'vue'
+import { watch, ref, computed, onMounted } from 'vue'
 import { useDebounceFn, useTitle } from '@vueuse/core'
 
 import { VMarkdownEditor, VMarkdownView } from 'vue3-markdown'
@@ -13,26 +13,26 @@ import { usePost } from '@/logic/usePost.vue'
 import { useEditor } from '@/logic/useEditor.vue'
 import { useModeSwitcher } from '@/logic/useModeSwitcher.vue'
 
+import { timestampToTime } from '../helps/time'
+
 const route = useRoute();
 const { text, title } = useEditor()
-const { updatePost } = usePost()
+const { updatePost, readPostDetail } = usePost()
 const { modeStatus, switchMode } = useModeSwitcher()
 
 const postId = route.params.postId
 
-function timestampToTime(timestamp) {
-  var date = new Date(timestamp);
-  var Y = date.getFullYear() + '-';
-  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-  var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
-  var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-  var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-  var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-  return Y + M + D + h + m + s;
-}
-
 const updatedAt = new ref(+new Date()) // milliseconds
 const updatedAtDateTime = computed(() => timestampToTime(updatedAt.value))
+
+onMounted(async () => {
+  const article = await readPostDetail(postId)
+
+  if (article) {
+    text.value = article.content || ""
+    updatedAt.value = article.updatedAt ? +new Date(article.updatedAt) : +new Date()
+  }
+})
 
 const onUpdatePost = useDebounceFn(async () => {
   const article = await updatePost(postId, title.value, text.value)

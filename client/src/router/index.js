@@ -22,6 +22,10 @@ const router = createRouter({
     {
       path: '/author/:userId/post/:postId',
       component: () => import('../views/PostView.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/' // handle 404 redirect
     }
   ]
 })

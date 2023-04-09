@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 const api = axios.create({
   baseURL: API_URL,
@@ -24,4 +24,18 @@ async function httpUpdatePost(postId, newTitle, newContent) {
   return res.data.article
 }
 
-export { httpCreateNewPost, httpIsAuthorized, httpUpdatePost }
+async function httpReadPost(postId) {
+  const res = await api.get(`/api/articles/${postId}`)
+  return res.data.article
+}
+
+async function httpShowAllArticles() {
+  const res = await api.get(`/api/articles`)
+  return res.data.articles
+}
+
+async function httpDeleteArticle(postId) {
+  await api.delete(`/api/articles/${postId}`)
+}
+
+export { httpCreateNewPost, httpIsAuthorized, httpUpdatePost, httpReadPost, httpShowAllArticles, httpDeleteArticle }

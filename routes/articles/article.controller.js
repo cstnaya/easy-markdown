@@ -28,14 +28,14 @@ async function httpReadArticle(req, res) {
   const articleId = req.params.articleId;
   const article = await readArticle(articleId);
 
-  res.json(article);
+  res.json({ article });
 }
 
 async function httpShowAllArticles(req, res) {
   const userId = req.user;
   const articles = await showAllArticles(userId);
 
-  res.json(articles);
+  res.json({ articles });
 }
 
 async function httpUpdateArticle(req, res) {

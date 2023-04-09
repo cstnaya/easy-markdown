@@ -1,5 +1,5 @@
 <script>
-import { httpUpdatePost } from '@/api/api'
+import { httpUpdatePost, httpReadPost, httpShowAllArticles, httpDeleteArticle } from '@/api/api'
 
 export const usePost = () => {
   const updatePost = async (postId, newTitle, newContent) => {
@@ -10,11 +10,25 @@ export const usePost = () => {
     }
   }
 
-  const deletePost = async () => {} // TODO:
+  const readPostDetail = async (postId) => {
+    try {
+      return await httpReadPost(postId)
+    } catch (e) {
+      return null
+    }
+  }
 
-  const readPostDetail = async () => {} // TODO:
+  const showAllPosts = async () => {
+    try {
+      return await httpShowAllArticles()
+    } catch (e) {
+      return []
+    }
+  }
 
-  const showAllPosts = async () => {} // TODO:
+  const deletePost = async (postId) => {
+    await httpDeleteArticle(postId)
+  }
 
   return { updatePost, deletePost, readPostDetail, showAllPosts }
 }

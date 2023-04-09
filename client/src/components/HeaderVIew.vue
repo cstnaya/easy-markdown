@@ -17,7 +17,7 @@ const { user } = storeToRefs(authStore)
             <router-link to="/" class="logo__item">Markdown</router-link>
         </div>
         <div class="user">
-            <router-link to="/profile" class="user__item" v-if="user">{{ user.name }}</router-link>
+            <router-link to="/" class="user__item" v-if="user">{{ user.name }}</router-link>
             <a :href="`/auth/google`" class="user__item" v-else>login</a>
         </div>
     </header>

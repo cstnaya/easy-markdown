@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useAuthed } from '@/stores/useAuthed'
 import HeaderView from '@/components/HeaderView.vue';
+import PostListView from '../components/PostListView.vue';
 
 const authStore = useAuthed()
 const { user } = storeToRefs(authStore)
@@ -11,7 +12,7 @@ const { user } = storeToRefs(authStore)
   <div>
     <HeaderView />
     <main>
-      <section class="ctx">
+      <section class="ctx ctx--black">
         <div class="container text-center">
           <h1>Start to colorful your own life!</h1>
           <div>
@@ -20,6 +21,7 @@ const { user } = storeToRefs(authStore)
           </div>
         </div>
       </section>
+      <PostListView v-if="user" />
     </main>
   </div>
 </template>
@@ -40,8 +42,10 @@ h1 {
 }
 
 .ctx {
-  background: #222;
   padding: 3em 0 10em;
+}
+.ctx--black {
+  background: #222;
 }
 
 .btn--add {

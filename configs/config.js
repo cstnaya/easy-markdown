@@ -5,7 +5,7 @@ const config = {
 
   CLIENT_ID: process.env.CLIENT_ID,
   CLIENT_SECRET: process.env.CLIENT_SECRET,
-  CALLBACK_URL: "/auth/google/callback",
+  CALLBACK_URL: process.env.BASE_RUL + "/auth/google/callback",
 
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
 

@@ -12,7 +12,6 @@ const authRouter = require("./routes/auth/auth.router");
 const articleRouter = require("./routes/articles/article.router");
 
 const corsOptions = require("./configs/cors");
-const httpsOption = require("./configs/https");
 
 const PORT = 8000;
 
@@ -37,7 +36,7 @@ db_trace_connect();
 (async function () {
   await db_connect();
 
-  https.createServer(httpsOption, app).listen(PORT, () => {
-    console.log("app runs on https://localhost:8000");
+  app.listen(PORT, () => {
+    console.log("app runs on http://localhost:8000");
   });
 })();

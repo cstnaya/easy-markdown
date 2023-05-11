@@ -4,6 +4,10 @@
 
 This is an online markdown application.  You can sign in by Google account and start to use it!
 
+##
+
+- [Online DEMO](https://ezmd.luluo-play-yard.xyz)
+
 ## Feature
 
 1. OAuth2.0 Google 3rd party login with JWT
@@ -51,7 +55,7 @@ This is an online markdown application.  You can sign in by Google account and s
 5. [x] CRUD documents
 6. [x] add Dockerfile
 3. [x] use cors middleware
-6. [x] use https
+6. [x] use https/ssl
 7. [ ] Github Action flow
 8. [ ] Allow frame-ancestors in readonly page 
 
